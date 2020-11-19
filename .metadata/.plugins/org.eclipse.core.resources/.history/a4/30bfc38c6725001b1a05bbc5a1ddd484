@@ -1,0 +1,22 @@
+package com.example.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.domain.MessageVO;
+import com.example.mapper.MessageMapper;
+import com.example.mapper.UserMapper;
+
+@Service
+public class UserService {
+	@Autowired
+	UserMapper uMapper;
+	
+	@Autowired
+	MessageMapper mMapper;
+	
+	public void insert(MessageVO vo){
+		mMapper.insert(vo);
+		uMapper.updatePoint(vo.getSender(), 10);
+	}
+}
